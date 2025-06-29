@@ -32,19 +32,6 @@ export default function NoteEditor({
     setHasChanges(hasTitleChanged || hasContentChanged);
   }, [title, content, note.title, note.content]);
 
-  // Auto-save on content change
-  useEffect(() => {
-    if (hasChanges) {
-      const timeoutId = setTimeout(() => {
-        if (hasChanges) {
-          handleSave();
-        }
-      }, 2000); // Auto-save after 2 seconds of no typing
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [title, content, hasChanges]);
-
   const handleSave = useCallback(() => {
     if (hasChanges) {
       onSave({
@@ -98,7 +85,7 @@ export default function NoteEditor({
         <Textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="Write your note here... (Auto-saves every 2 seconds)"
+          placeholder="Write your note here... (Manual save)"
           className="h-full resize-none border-none focus-visible:ring-0 p-4 min-h-[calc(100vh-350px)]"
         />
       </CardContent>

@@ -20,14 +20,14 @@ export default function Home() {
     setNotes(loadNotes());
   }, []);
 
-  // Auto-save with debouncing
+  // Save notes to localStorage whenever notes change
   useEffect(() => {
     if (notes.length > 0) {
       setIsSaving(true);
       const timeoutId = setTimeout(() => {
         saveNotes(notes);
         setIsSaving(false);
-      }, 1000);
+      }, 500); // Reduced delay since NoteEditor already handles the main auto-save
 
       return () => clearTimeout(timeoutId);
     }
