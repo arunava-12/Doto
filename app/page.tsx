@@ -33,38 +33,6 @@ export default function Home() {
     }
   }, [notes]);
 
-  // Keyboard shortcuts
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Ctrl/Cmd + N: New note
-      if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
-        e.preventDefault();
-        createNewNote();
-      }
-      
-      // Ctrl/Cmd + S: Save note (when editing)
-      if ((e.ctrlKey || e.metaKey) && e.key === 's' && isEditing) {
-        e.preventDefault();
-        // This will be handled by the NoteEditor component
-      }
-      
-      // Escape: Cancel edit
-      if (e.key === 'Escape' && isEditing) {
-        e.preventDefault();
-        cancelEdit();
-      }
-      
-      // Ctrl/Cmd + K: Focus search (we'll add this later)
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        // TODO: Focus search input
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isEditing]);
-
   const createNewNote = useCallback(() => {
     const newNote: Note = {
       id: Date.now().toString(),
@@ -106,6 +74,38 @@ export default function Home() {
       setIsEditing(false);
     }
   }, [notes, activeNote]);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl/Cmd + N: New note
+      if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
+        e.preventDefault();
+        createNewNote();
+      }
+      
+      // Ctrl/Cmd + S: Save note (when editing)
+      if ((e.ctrlKey || e.metaKey) && e.key === 's' && isEditing) {
+        e.preventDefault();
+        // This will be handled by the NoteEditor component
+      }
+      
+      // Escape: Cancel edit
+      if (e.key === 'Escape' && isEditing) {
+        e.preventDefault();
+        cancelEdit();
+      }
+      
+      // Ctrl/Cmd + K: Focus search (we'll add this later)
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        // TODO: Focus search input
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isEditing, createNewNote, cancelEdit]);
 
   const renderNoteContent = () => {
     if (!activeNote && notes.length === 0) {
