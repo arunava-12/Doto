@@ -2,8 +2,6 @@
 
 A beautiful, fast, and intuitive note-taking web application built with Next.js 15, React 19, and TypeScript. Doto provides a seamless writing experience with modern UI design and powerful features.
 
-![Doto App](public/dot.png)
-
 ## ✨ Features
 
 ### 🎨 **Modern Design**
