@@ -4,7 +4,7 @@ A beautiful, fast, and intuitive note-taking web application built with Next.js 
 
 ![Doto App](public/dot.png)
 
-## ✨ Features
+## ✨ Features 
 
 ### 🎨 **Modern Design**
 - **Dark/Light Theme Toggle** - Switch between themes or follow system preference
